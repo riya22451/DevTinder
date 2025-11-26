@@ -44,9 +44,16 @@ app.delete('/user',async (req,res)=>{
         res.status(500).send({message:'Error deleting user'});
     }
 })
-app.patch('/user',async (req,res)=>{
-    const id=req.body.userId
+app.patch('/user/:id',async (req,res)=>{
+    const id=req.params?.id
     const updates=req.body.updates
+    const allowedUpdates=['age','gender'];
+    const isValidOperation=Object.keys(updates).every((update)=>{
+        return allowedUpdates.includes(update);
+    })
+    if(!isValidOperation){
+        return res.status(400).send({message:'Invalid updates!'});
+    }
     try {
         const updatedUser=await User.findByIdAndUpdate({_id:id},updates)
         res.status(200).send({message:'User updated successfully'});
