@@ -2,6 +2,7 @@ const express=require('express');
 const bcrypt=require('bcrypt');
 const User=require('../models/user.js')
 const {validateSignUpData}=require('../utils/validation.js')
+const validator=require('validator')
 const authrouter=express.Router();
 authrouter.post('/signup', async (req,res)=>{
    
@@ -48,5 +49,9 @@ res.cookie('token',token,{httpOnly:true})
     } catch (error) {
         return res.status(500).send({message:error.message})
     }
+})
+authrouter.post('/logout',(req,res)=>{
+    res.clearCookie('token')
+    res.status(200).send({message:'LogOut Successful'})
 })
 module.exports=authrouter
