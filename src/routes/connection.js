@@ -38,4 +38,28 @@ connectionRouter.post('/request/send/:status/:toUserId',authUser,async (req,res)
             messsage:error.message})
     }
 })
+connectionRouter.post('/request/review/:status/:requestId',authUser,async (req,res)=>{
+    try {
+        const requestId=req.params.requestId;
+        const status=req.params.status;
+        const loggedInUserId=req.user._id;
+        const validValues=['accepted','rejected']
+        if(!validValues.includes(status)){
+            throw new Error('Invalid status');
+        }
+
+        const connection=await Connection.findOne({_id:requestId,toUserId:loggedInUserId,status:'interested'});
+        
+       
+        if(!connection){
+            throw new Error('Connection request not found');
+        }
+        
+        connection.status=status;
+        await connection.save();
+        res.status(200).json({message:`Connection request ${status} successfully`})
+    } catch (error) {
+        res.status(400).json({message:error.message})
+    }
+})
 module.exports=connectionRouter
