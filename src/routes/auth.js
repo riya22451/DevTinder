@@ -48,7 +48,10 @@ authrouter.post('/login',async (req,res)=>{
       // Add the token to the cookies and respond back
 const token=user.getJWT();
 
-res.cookie('token',token)
+res.cookie('token',token,{
+    secure: true,
+  sameSite: "none",
+})
     
 
 
