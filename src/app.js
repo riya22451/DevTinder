@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: 'https://lovely-sunburst-2d760b.netlify.app',
   credentials: true,
  
 }));
