@@ -10,12 +10,16 @@ authrouter.post('/signup', async (req,res)=>{
         validateSignUpData(req);
  
  const hash=await bcrypt.hash(req.body.password,10)
- const {firstName,lastName,emailId}=req.body
+ const {firstName,lastName,emailId,age,gender,photoUrl,about}=req.body
  const user=new User({
     firstName,
     lastName,
     emailId,
-    password:hash
+    password:hash,
+    age,
+    gender,
+    photoUrl,
+    about
  });
 await user.save();
 res.status(201).send({message:'User registered successfully'});
@@ -44,8 +48,11 @@ authrouter.post('/login',async (req,res)=>{
       // Add the token to the cookies and respond back
 const token=user.getJWT();
 
-res.cookie('token',token,{httpOnly:true})
-      return res.status(200).send({message:'Login successful'})
+res.cookie('token',token)
+    
+
+
+      return res.status(200).send({user})
     } catch (error) {
         return res.status(500).send({message:error.message})
     }

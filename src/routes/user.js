@@ -11,25 +11,30 @@ userRouter.get('/connections', authUser, async (req, res) => {
         { fromUserId: req.user._id },
         { toUserId: req.user._id }
       ]
-    }).populate('toUserId',['firstName','lastName']).populate('fromUserId',['firstName','lastName']);
+    })
+      .populate('toUserId', ['firstName', 'lastName','about','photoUrl'])
+      .populate('fromUserId', ['firstName', 'lastName','about','photoUrl']);
 
-     const data=await connections.map((connection)=>{
-        if(connection.fromUserId._id.equals(req.user._id)){
-            return connection.toUserId
-        }
-        else{
-            return connection.fromUserId
-        }
-     })
-    res.status(200).json({ connections });
+    // Return only the connected users
+    const connectedUsers = connections.map((connection) => {
+      // If I am the sender, return receiver
+      if (connection.fromUserId._id.equals(req.user._id)) {
+        return connection.toUserId;
+      }
+      // Else return sender
+      return connection.fromUserId;
+    });
+
+    res.status(200).json({ connections: connectedUsers });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
+
 userRouter.get('/requests',authUser,async (req,res)=>{
  try {
     const userId=req.user._id;
-    const requests=await Connection.find({toUserId:userId,status:'interested'}).populate('fromUserId',['firstName','lastName']);
+    const requests=await Connection.find({toUserId:userId,status:'interested'}).populate('fromUserId',['firstName','lastName','about','photoUrl']);
     res.status(200).json({requests});
  } catch (error) {
     res.status(500).json({message:error.message});

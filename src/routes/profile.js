@@ -4,12 +4,18 @@ const authUser=require('../../middlewares/auth.middleware.js')
 const validateUpdate=require('../utils/validateUpdate.js')
 const validator=require('validator')
 const bcrypt=require('bcrypt')
-profileRouter.get('/profile',authUser,async (req,res)=>{
-    
-   const user=req.user;
-    res.send(user)
+profileRouter.get('/',authUser,async (req,res)=>{
+    try{
+      const user=req.user;
+      res.send(user)
+
+    }
+    catch(error){
+        res.status(500).send(error.message);
+    }
+
 })
-profileRouter.patch('/profile/edit',authUser,async (req,res)=>{
+profileRouter.patch('/edit',authUser,async (req,res)=>{
 try {
     if(!validateUpdate(req.body)){
         throw new Error('Invalid updates!')
@@ -20,7 +26,7 @@ try {
         user[update]=req.body[update]
     })
     await user.save();
-    res.status(200).send({message:"User updated successfully"})
+    res.status(200).send({user})
 } catch (error) {
     return res.status(404).send(error.message);
 }
