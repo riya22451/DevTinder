@@ -4,7 +4,7 @@ const User=require('../models/user.js')
 const {validateSignUpData}=require('../utils/validation.js')
 const validator=require('validator')
 const authrouter=express.Router();
-const sendEmail = require('../utils/sendEmail.js');
+// const sendEmail = require('../utils/sendEmail.js');
 authrouter.post('/signup', async (req,res)=>{
    
     try{
@@ -23,18 +23,18 @@ authrouter.post('/signup', async (req,res)=>{
     about
  });
 await user.save();
-try {
-  await sendEmail(
-    user.emailId,
-    "Welcome to DevTinder 🎉",
-    `
-      <h2>Hello ${user.firstName},</h2>
-      <p>Welcome to DevTinder!</p>
-    `
-  );
-} catch (emailErr) {
-  console.log("Email Failed But Signup Continues:", emailErr.message);
-}
+// try {
+//   await sendEmail(
+//     user.emailId,
+//     "Welcome to DevTinder 🎉",
+//     `
+//       <h2>Hello ${user.firstName},</h2>
+//       <p>Welcome to DevTinder!</p>
+//     `
+//   );
+// } catch (emailErr) {
+//   console.log("Email Failed But Signup Continues:", emailErr.message);
+// }
 
 
 const token=user.getJWT();
