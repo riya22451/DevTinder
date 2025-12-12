@@ -38,6 +38,7 @@ await sendEmail(
 const token=user.getJWT();
 
 res.cookie('token',token,{
+    httpOnly: true,
     secure: true,
   sameSite: "none",
 })
