@@ -23,17 +23,19 @@ authrouter.post('/signup', async (req,res)=>{
     about
  });
 await user.save();
-await sendEmail(
-      user.emailId,
-      "Welcome to DevTinder 🎉",
-      `
+try {
+  await sendEmail(
+    user.emailId,
+    "Welcome to DevTinder 🎉",
+    `
       <h2>Hello ${user.firstName},</h2>
-      <p>Welcome to DevTinder! Your account has been created successfully.</p>
-      <p>We're excited to have you on board.</p>
-      <br/>
-      <strong>DevTinder Team</strong>
-      `
-    );
+      <p>Welcome to DevTinder!</p>
+    `
+  );
+} catch (emailErr) {
+  console.log("Email Failed But Signup Continues:", emailErr.message);
+}
+
 
 const token=user.getJWT();
 
