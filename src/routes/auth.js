@@ -4,7 +4,7 @@ const User=require('../models/user.js')
 const {validateSignUpData}=require('../utils/validation.js')
 const validator=require('validator')
 const authrouter=express.Router();
-const sendEmail=require('../utils/sendEmail.js')
+
 authrouter.post('/signup', async (req,res)=>{
    
     try{
@@ -23,17 +23,7 @@ authrouter.post('/signup', async (req,res)=>{
     about
  });
 await user.save();
-// await sendEmail(
-//       user.emailId,
-//       "Welcome to DevTinder 🎉",
-//       `
-//       <h2>Hello ${user.firstName},</h2>
-//       <p>Welcome to DevTinder! Your account has been created successfully.</p>
-//       <p>We're excited to have you on board.</p>
-//       <br/>
-//       <strong>DevTinder Team</strong>
-//       `
-//     );
+
 
 const token=user.getJWT();
 

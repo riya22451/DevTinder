@@ -14,7 +14,7 @@ const sendEmail = async (to, subject, html) => {
     });
 
     await transporter.sendMail({
-      from: `DevTinder <${process.env.BREVO_USER}>`,
+      from: `DevTinder <${BREVO_USER}>`,
       to,
       subject,
       html,
