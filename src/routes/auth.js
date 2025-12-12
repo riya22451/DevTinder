@@ -4,7 +4,7 @@ const User=require('../models/user.js')
 const {validateSignUpData}=require('../utils/validation.js')
 const validator=require('validator')
 const authrouter=express.Router();
-
+const sendEmail = require('../utils/sendEmail.js');
 authrouter.post('/signup', async (req,res)=>{
    
     try{
