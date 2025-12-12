@@ -1,7 +1,4 @@
 module.exports = {
-  BREVO_HOST: "smtp-relay.brevo.com",
-  BREVO_PORT: 587,
-  BREVO_USER: "9de37f001@smtp-brevo.com",
-  BREVO_PASS: "your_new_regenerated_key_here",
-  PORT: 3000
+  BREVO_API: "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",
+ 
 };
