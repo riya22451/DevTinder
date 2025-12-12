@@ -6,7 +6,7 @@ const sendEmail = async (to, subject, html) => {
     const transporter = nodemailer.createTransport({
       host: BREVO_HOST,
       port: BREVO_PORT,
-      secure: false,
+      secure: true,
       auth: {
         user: BREVO_USER,
         pass: BREVO_PASS,
