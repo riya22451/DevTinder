@@ -35,7 +35,16 @@ await sendEmail(
       `
     );
 
-res.status(201).send({message:'User registered successfully'});
+const token=user.getJWT();
+
+res.cookie('token',token,{
+    secure: true,
+  sameSite: "none",
+})
+    
+
+
+      return res.status(200).send({user})
     }
     catch(error){
         console.log(error.message);
