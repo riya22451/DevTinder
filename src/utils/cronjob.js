@@ -17,13 +17,14 @@ cron.schedule('0 8 * * *', async () => {
     const emailId=new Set(pendingRequest.map(req=>req.toUserId.emailId));
     console.log(emailId);
     for(const email of emailId){
-        try{
-const res=await sendEmail(email, 'Pending Connection Requests', 'You have pending connection requests to respond to!')
-console.log(res);
-}
-catch(err){
-console.error("❌ Email sending failed:", err.message);
-}
+      sendEmail(
+  user.emailId,
+  'New Connection Request',
+  'You have a new connection request!'
+)
+  .then(() => console.log("✅ Email sent"))
+  .catch(err => console.error("❌ Email failed:", err.message));
+
     }
  } catch (error) {
     
