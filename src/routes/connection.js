@@ -3,6 +3,7 @@ const connectionRouter=express.Router();
 const Connection=require('../models/connection.js')
 const authUser=require('../../middlewares/auth.middleware.js')
 const User=require('../models/user.js')
+const {sendEmail}=require('../utils/sendEmail.js')
 connectionRouter.post('/request/send/:status/:toUserId', authUser, async (req, res) => {
   try {
     const fromUserId = req.user._id;
@@ -43,6 +44,7 @@ connectionRouter.post('/request/send/:status/:toUserId', authUser, async (req, r
     });
 
     await connection.save();
+    await sendEmail(user.emailId)
     res.status(200).json({ message: 'Connection request sent successfully' });
 
   } catch (error) {

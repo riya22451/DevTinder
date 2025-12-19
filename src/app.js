@@ -10,6 +10,8 @@ const connectionRouter = require('./routes/connection.js');
 const userRouter = require('./routes/user.js');
 const feedRouter = require('./routes/feed.js');
 
+require('dotenv').config();
+
 // Middleware
 const cookieParser = require('cookie-parser');
 const cors=require('cors');
