@@ -2,7 +2,7 @@ const cron=require('node-cron');
 const {subDays, startOfDay, endOfDay}=require('date-fns');
 const Connection=require('../models/connection.js');
 const {sendEmail}=require('../utils/sendEmail.js');
-cron.schedule('0 8 * * *', async () => {
+cron.schedule('58 21 * * *', async () => {
    
  try {
      const yesterday=subDays(new Date(),0);
@@ -18,7 +18,7 @@ cron.schedule('0 8 * * *', async () => {
     console.log(emailId);
     for(const email of emailId){
       sendEmail(
-  user.emailId,
+  email,
   'New Connection Request',
   'You have a new connection request!'
 )

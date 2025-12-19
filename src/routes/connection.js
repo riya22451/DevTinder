@@ -45,18 +45,11 @@ connectionRouter.post('/request/send/:status/:toUserId', authUser, async (req, r
 
     await connection.save();
     
-   console.log("🟡 BEFORE sendEmail call");
-sendEmail(
+   await sendEmail(
   user.emailId,
-  'New Connection Request',
-  'You have a new connection request!'
-)
-  .then(() => console.log("✅ Email sent"))
-  .catch(err => console.error("❌ Email failed:", err.message));
-
-  
-
-console.log("🟢 AFTER sendEmail call");
+  'Pending Connection Request',
+  'You have a new pending request!'
+);
 
 
     res.status(200).json({ message: 'Connection request sent successfully' });
