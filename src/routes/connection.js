@@ -46,14 +46,15 @@ connectionRouter.post('/request/send/:status/:toUserId', authUser, async (req, r
     await connection.save();
     
    console.log("🟡 BEFORE sendEmail call");
+try{
+const res=await sendEmail(user.emailId, 'New Connection Request', 'You have a new connection request!')
+console.log(res);
+}
+catch(err){
+console.error("❌ Email sending failed:", err.message);
+}
 
-sendEmail(user.emailId)
-  .then((info) => {
-    console.log("✅ Email sent successfully");
-  })
-  .catch((err) => {
-    console.error("❌ Email sending failed:", err.message);
-  });
+  
 
 console.log("🟢 AFTER sendEmail call");
 

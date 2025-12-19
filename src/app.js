@@ -11,7 +11,7 @@ const userRouter = require('./routes/user.js');
 const feedRouter = require('./routes/feed.js');
 
 require('dotenv').config();
-
+require('./utils/cronjob.js');
 // Middleware
 const cookieParser = require('cookie-parser');
 const cors=require('cors');
@@ -25,7 +25,9 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: 'https://dev-tinder-ui-one.vercel.app',
+  origin:[ "http://localhost:5173",          // local frontend
+      "http://localhost:3000",          // local backend testing
+      "https://dev-tinder-ui-one.vercel.app"], // deployed frontend,
   credentials: true,
  
 }));
