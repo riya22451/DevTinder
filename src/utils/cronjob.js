@@ -2,7 +2,7 @@ const cron=require('node-cron');
 const {subDays, startOfDay, endOfDay}=require('date-fns');
 const Connection=require('../models/connection.js');
 const {sendEmail}=require('../utils/sendEmail.js');
-cron.schedule('31 21 * * *', async () => {
+cron.schedule('0 8 * * *', async () => {
    
  try {
      const yesterday=subDays(new Date(),0);
