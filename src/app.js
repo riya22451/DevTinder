@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: 'https://lovely-sunburst-2d760b.netlify.app',
+  origin: 'https://dev-tinder-ui-one.vercel.app',
   credentials: true,
  
 }));
