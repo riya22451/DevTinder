@@ -47,8 +47,8 @@ connectionRouter.post('/request/send/:status/:toUserId', authUser, async (req, r
     
    await sendEmail(
   user.emailId,
-  'Pending Connection Request',
-  'You have a new pending request!'
+  'new Connection Request',
+  'You have a new new request!'
 );
 
 

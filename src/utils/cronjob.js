@@ -19,8 +19,8 @@ cron.schedule('58 21 * * *', async () => {
     for(const email of emailId){
       sendEmail(
   email,
-  'New Connection Request',
-  'You have a new connection request!'
+  'pending Connection Request',
+  'You have a pending connection request!'
 )
   .then(() => console.log("✅ Email sent"))
   .catch(err => console.error("❌ Email failed:", err.message));
