@@ -1,7 +1,7 @@
 const mongoose=require('mongoose')
 const connectDB=async()=>{
     try{
-        const conn=await mongoose.connect("mongodb+srv://riya:riya1005@cluster0.mfqgmag.mongodb.net/mydb")
+        const conn=await mongoose.connect(process.env.MONGO_URL)
        return conn;
     }
     catch(error){
