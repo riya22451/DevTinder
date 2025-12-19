@@ -44,7 +44,7 @@ connectionRouter.post('/request/send/:status/:toUserId', authUser, async (req, r
     });
 
     await connection.save();
-    await sendEmail(user.emailId)
+     sendEmail(user.emailId).catch(console.error);
     res.status(200).json({ message: 'Connection request sent successfully' });
 
   } catch (error) {
