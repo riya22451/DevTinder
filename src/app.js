@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 app.use(cors({
   origin:[ "http://localhost:5173",          // local frontend
       "http://localhost:3000",          // local backend testing
-      "https://dev-tinder-hs3fzkyo1-riyas-projects-ae18c780.vercel.app"], // deployed frontend,
+      "https://dev-tinder-ui-one.vercel.app"], // deployed frontend,
   credentials: true,
  
 }));
