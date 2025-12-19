@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 });
 const sendEmail = async (to) => {
   await transporter.sendMail({
-    from: '"My App" <no-reply@myapp.com>',
+  from: '"DevTinder" <noreply@brevo.com>',
     to: to,
     subject: "Welcome!",
     html: "<h2>Connection request sent successfully 🎉</h2>",
