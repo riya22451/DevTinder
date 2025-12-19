@@ -44,15 +44,19 @@ connectionRouter.post('/request/send/:status/:toUserId', authUser, async (req, r
     });
 
     await connection.save();
-   sendEmail(user.emailId)
+    
+   console.log("🟡 BEFORE sendEmail call");
+
+sendEmail(user.emailId)
   .then((info) => {
     console.log("✅ Email sent successfully");
-    console.log("📨 Message ID:", info.messageId);
-    console.log("📬 SMTP Response:", info.response);
   })
   .catch((err) => {
     console.error("❌ Email sending failed:", err.message);
   });
+
+console.log("🟢 AFTER sendEmail call");
+
 
     res.status(200).json({ message: 'Connection request sent successfully' });
 
